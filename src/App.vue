@@ -1,10 +1,14 @@
 <script setup>
-import MainScreen from './components/MainScreen.vue';
+import MainScreen from './Pages/MainScreen.vue';
+import LoginPage from './Pages/LoginPage.vue';
 </script>
 
 <template>
-  <div >
-    <MainScreen></MainScreen>
+  <h1>
+    Yo! we're at {{$route.fullPath  }}
+  </h1>
+  <div>
+
   </div>
 </template>
 

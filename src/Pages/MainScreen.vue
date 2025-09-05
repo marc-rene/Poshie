@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import ActionsBar from './ActionsBar.vue'
-import PastMessagesContainer from './PastMessagesContainer.vue'
-import MessagesContainer from './MessagesContainer.vue'
+import ActionsBar from '../components/ActionsBar.vue'
+import PastMessagesContainer from '../components/PastMessagesContainer.vue'
+import MessagesContainer from '../components/MessagesContainer.vue'
 
 defineProps({
 
