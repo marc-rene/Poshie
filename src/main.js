@@ -8,11 +8,6 @@ import App from './App.vue'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './Firebase'
 
-let app
-onAuthStateChanged(auth, () => {
-  if (!app) {
-    app = createApp(App).use(router).mount('#app')
-  }
-})
+
 
 createApp(App).use(router).mount('#app')

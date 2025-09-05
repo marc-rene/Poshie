@@ -6,7 +6,7 @@ import { RouterView } from 'vue-router';
 
 <template>
   <h1>
-    Yo! we're at {{$route.fullPath  }}
+    Yo! we're at {{$route.fullPath}}
   </h1>
   <RouterView></RouterView>
 

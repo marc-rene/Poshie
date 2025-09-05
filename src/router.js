@@ -1,4 +1,4 @@
-import { createMemoryHistory, createRouter } from 'vue-router'
+import { createWebHistory, createRouter } from 'vue-router'
 import MainScreen from './Pages/MainScreen.vue'
 import LoginPage from './Pages/LoginPage.vue'
 import { auth } from './Firebase'
@@ -12,21 +12,34 @@ const routes = [
         meta: { requiresAuth: true }
     },
     {
-        path: '/login', 
-        name: 'Login', 
-        component: LoginPage
+        path: '/login',
+        component: LoginPage,
+        meta: { guestOnly: true }
     }
 ]
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes,
 })
 
-// GOOD
-router.beforeEach((to, from, next) => {
-    if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
-    else next('/')
-})
+
+router.beforeEach(async (to) => {
+  // wait until firebase finishes checking user state
+  const user = auth.currentUser;
+
+  if (to.meta.requiresAuth && !user) {
+    return { path: "/login" }; // not logged in → yeet to login
+  }
+
+  else if (to.meta.guestOnly && user) {
+    return { path: "/" }; // logged in but going login → yeet back
+  }
+
+  return true;
+});
+
+
+
 
 export default router
