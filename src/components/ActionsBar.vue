@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { auth } from '../Firebase';
 
 defineProps({
 Logged_in: Boolean,
@@ -12,7 +13,7 @@ Logged_in: Boolean,
     <div id="LOGO_BANNER">LOGO HERE</div>
     <div id="SETTINGS_QUICK">SETTINGS</div>
     <div id="HELP_QUICK">HELP</div>
-    <div id="ACCOUNT_QUICK">ACCOUNT</div>
+    <div id="ACCOUNT_QUICK">{{ auth.currentUser.email }}</div>
   </div>
 </template>
 

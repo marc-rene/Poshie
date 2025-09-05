@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore, collection, query, where, getDoc } from "firebase/firestore";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -12,6 +13,24 @@ const firebaseConfig = {
   measurementId: "G-6NC9ECVFG0"
 };
 
-const app = initializeApp(firebaseConfig);
+export async function getUsernameById(userID) {
+  const q = query(
+    collection(db, "Usernames"),
+    where("__name__", "==", userID) 
+  );
+  const snap = await getDoc(q);
+  return snap.doc;
+}
+
+export async function getUsernamesByIds(userIds) {
+  const q = query(
+    collection(db, "Usernames"),
+    where("__name__", "in", userIds)
+  );
+  const snap = await getDocs(q);
+  return snap.docs.map(doc => ({ id: doc.id, Username: doc.data().Username }));
+}
+
+export const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);

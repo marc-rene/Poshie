@@ -1,12 +1,11 @@
 <script setup>
-import MainScreen from './Pages/MainScreen.vue';
-import LoginPage from './Pages/LoginPage.vue';
 import { RouterView } from 'vue-router';
+import { auth } from './Firebase';
 </script>
 
 <template>
   <h1>
-    Yo! we're at {{$route.fullPath}}
+    Yo! we're at {{$route.fullPath}} and {{ auth.currentUser ? auth.currentUser.uid : "NA" }}
   </h1>
   <RouterView></RouterView>
 
