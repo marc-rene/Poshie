@@ -9,9 +9,9 @@ const count = ref(0)
 </script>
 
 <template>
-  <h1>
+  <div class="h-full w-full bg-teal-300">
     Messages Container
-  </h1>
+  </div>
 </template>
 
 <style scoped>

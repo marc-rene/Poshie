@@ -10,7 +10,7 @@ const count = ref(0)
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-4 bg-amber-500">
+  <div class="bg-amber-500 h-full w-full">
     ALL PAST MESSAGES
   </div>
 </template>

@@ -11,18 +11,20 @@ defineProps({
 </script>
 
 <template>
-  <div class="grid grid-cols-2 grid-rows-2 gap-4 bg-green-500 w-screen h-screen ">
+  <div class="flex flex-col bg-green-500 w-screen h-screen ">
 
 
-    <div class="bg-red-100 col-span-2 shrink" id="Log">
-      <ActionsBar/>
+    <div class="bg-red-100 h-22" id="Log">
+      <ActionsBar />
     </div>
 
-    <div class="h-full">
-      <PastMessagesContainer></PastMessagesContainer>
-    </div>
-    <div class="h-full">
-      <MessagesContainer></MessagesContainer> 
+    <div class="flex flex-1">
+      <div class="h-full w-[20%] shrink-0">
+        <PastMessagesContainer />
+      </div>
+      <div class="h-full flex-1">
+        <MessagesContainer />
+      </div>
     </div>
   </div>
 </template>
