@@ -1,25 +1,29 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { getUsernamesByIds } from '../Firebase'
+import { getUsernamesByIds, auth } from '../Firebase'
+import { Chatroom } from '../Types';
 
 
-defineProps({
-  chatroomdata: {}
-})
+const { chatroomdata } = defineProps<{ chatroomdata: Chatroom }>()
 
-const usernames = ref([])
 
-onMounted(async () => {
-  var count = 0;
-  usernames.value = getUsernamesByIds(chatroomdata.Users)
+const users = ref('')
+
+onMounted(() => {
+  const otherUsers = chatroomdata.Users.filter(
+    (id) => id !== auth.currentUser?.uid
+  )
+  users.value = getUsernamesByIds(otherUsers).toString();
+ // users.value = "Adsf";
+
 })
 </script>
 
 <template>
   <div class="grid grid-cols-1 grid-rows-2  bg-blue-500">
-    <h2 v-if="chatroomdata.Nickname"> {{ chatroomdata.Nickname }}</h2>
-    <h2 v-else> Chat with {{ usernames }} </h2>
-    
+    <!--<h2 v-if="chatroomdata.Nickname"> {{ chatroomdata.Nickname }}</h2>-->
+    <h2> Chat with {{ users }} </h2>
+
   </div>
 </template>
 
