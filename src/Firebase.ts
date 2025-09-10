@@ -29,7 +29,7 @@ export async function getUsernameById(userID: string) {
   }
 }
 
-export async function getUsernamesByIds(userIds: Array<string>): Array<string> 
+export async function getUsernamesByIds(userIds: Array<string>): Promise<string[]> 
 {
   const q = query(collection(db, "Usernames"),  where("__name__", "in", userIds));
 

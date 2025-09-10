@@ -16,7 +16,7 @@ const router = useRouter()
 const submit = async () => {
   error.value = ''
   try {
-    if (isRegister.value) {
+    if (isRegister.value === true) {
       await createUserWithEmailAndPassword(auth, email.value, password.value)
     } 
     else {

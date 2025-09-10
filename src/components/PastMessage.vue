@@ -9,14 +9,20 @@ const { chatroomdata } = defineProps<{ chatroomdata: Chatroom }>()
 
 const users = ref('')
 
-onMounted(() => {
-  const otherUsers = chatroomdata.Users.filter(
-    (id) => id !== auth.currentUser?.uid
-  )
-  users.value = getUsernamesByIds(otherUsers).toString();
- // users.value = "Adsf";
-
+onMounted(async () => {
+  if (chatroomdata.Nickname == "ad") {
+    users.value = chatroomdata.Nickname
+  }
+  else {
+    const otherUsers = chatroomdata.Users
+      .filter((id) => id !== auth.currentUser?.uid)
+      .slice(0, 3)
+    const usernames = await getUsernamesByIds(otherUsers)
+    users.value = usernames.join(', ')
+  }
 })
+
+
 </script>
 
 <template>
