@@ -30,10 +30,8 @@ onMounted(async () => {
 
 <template>
   <div class="bg-amber-500 h-full w-full">
-    <!-- show empty -->
     <p v-if="chatrooms?.length === 0">no chatrooms found.</p>
 
-    <!-- loop results -->
     <ul v-else class="space-y-2">
       <li v-for="room in chatrooms" :key="room.id" class="p-3 rounded-lg border bg-white shadow">
         <PastMessage :chatroomdata="room"></PastMessage>

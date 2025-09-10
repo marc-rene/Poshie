@@ -1,7 +1,6 @@
 <script setup>
 import { RouterView } from 'vue-router';
 import { auth } from './Firebase';
-import { Server } from "socket.io"
 </script>
 
 <template>
