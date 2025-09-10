@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, query, where, getDoc, getDocs, doc } from "firebase/firestore";
+import { getFirestore, collection, query, where, getDoc, getDocs, doc, Timestamp, addDoc, serverTimestamp  } from "firebase/firestore";
+import type { Chats } from "./Types";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -38,7 +39,16 @@ export async function getUsernamesByIds(userIds: Array<string>): Promise<string[
   querySnapshot.forEach((doc) => {
     usernames.push(doc.data().Username)
   });
+
+  if (usernames.length === (userIds.length - 1))
+  {
+    usernames.push("Stranger")
+  }
+
+  else if (usernames.length <= (userIds.length - 2))
+  {
+    usernames.push("Strangers")
+  }
+
   return usernames;
 }
-
-

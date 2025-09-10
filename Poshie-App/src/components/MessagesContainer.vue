@@ -1,31 +1,38 @@
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { io } from "socket.io-client"
 import { socket } from "../AppSockets"
+import { auth } from '../Firebase'
+import type { Chats } from "../Types"
+import { stringifyQuery } from 'vue-router'
 
-
-defineProps({
+const props = defineProps({
   ChatRoomID: String,
 })
-const texts = ref([]);
+const texts = ref(['']);
 
-
+const inputText = ref('')
 
 socket.on('message', text => {
-  texts.value.push("Hello!");
+  texts.value.push(text);
 })
 
 function Send() {
   console.log("Sent it")
-  socket.emit('message', "BONJOUR")
+  let new_msg: Chats = {
+    UTCstamp: undefined,
+    SpeakerID: auth?.currentUser?.uid,
+    Original_Message: inputText.value,
+    Edited_Message: "",
+  };
+  socket.emit('message', "5ku4P1Mp62Zy7z0CXg3Z", new_msg)
 }
 
-onMounted(() =>
-{
+onMounted(() => {
   socket.connect()
 });
 
-const count = ref(0)
+
 </script>
 
 <template>
@@ -33,14 +40,14 @@ const count = ref(0)
     <h1>Messages Container</h1>
 
     <ul class="space-y-2">
-      <li v-for="text in texts" class="p-3 rounded-lg border bg-white shadow">
+      <li v-for="text in texts" class="p-3 rounded-lg border shadow">
         <p>{{ text }}</p>
       </li>
     </ul>
 
   </div>
-
-  <button @onclick="Send()"> Send </button>
+  <input type="text" v-model="inputText" class="bg-gray-700"></input>
+  <button @click="Send"> Send </button>
 </template>
 
 <style scoped>

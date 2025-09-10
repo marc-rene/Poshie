@@ -10,6 +10,8 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "firebase": "^12.2.1",
+    "firestore": "^1.1.6",
     "socket.io": "^4.8.1"
   }
 }
