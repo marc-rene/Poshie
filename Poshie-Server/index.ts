@@ -45,7 +45,7 @@ io.on('connection', (socket: any) => {
 
 async function spawnOllama(text: string): Promise<string> {
   const proc = Bun.spawn(
-    ['ollama', 'run', 'poshseek', '-p', text],
+    ['ollama', 'run', 'Prickseek', text],
     { stdout: 'pipe', stderr: 'pipe' }
   );
 
